@@ -128,11 +128,15 @@ return {
               ["<C-Up>"] = actions.cycle_history_prev,
               ["<C-f>"] = actions.preview_scrolling_down,
               ["<C-b>"] = actions.preview_scrolling_up,
+              ['<C-p>'] = require('telescope.actions.layout').toggle_preview 
             },
             n = {
               ["q"] = actions.close,
             },
           },
+          preview = {                                                                                                                                                                          
+            hide_on_startup = true -- hide previewer when picker starts
+          } 
         },
       }
     end,
