@@ -2,6 +2,12 @@ return {
   {
     "nvim-telescope/telescope-file-browser.nvim",
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>sB", ":Telescope file_browser path=%:p:h=%:p:h<cr>", desc = "Browse Files" },
+    },
+    config = function()
+      require("telescope").load_extension("file_browser")
+    end,
   },
   {
     "nvim-telescope/telescope.nvim",
@@ -83,7 +89,7 @@ return {
     },
     opts = function()
       local actions = require("telescope.actions")
-  
+
       local open_with_trouble = function(...)
         return require("trouble.providers.telescope").open_with_trouble(...)
       end
@@ -100,7 +106,7 @@ return {
         local line = action_state.get_current_line()
         LazyVim.telescope("find_files", { hidden = true, default_text = line })()
       end
-  
+
       return {
         defaults = {
           prompt_prefix = " ",
@@ -128,17 +134,17 @@ return {
               ["<C-Up>"] = actions.cycle_history_prev,
               ["<C-f>"] = actions.preview_scrolling_down,
               ["<C-b>"] = actions.preview_scrolling_up,
-              ['<C-p>'] = require('telescope.actions.layout').toggle_preview 
+              ["<C-p>"] = require("telescope.actions.layout").toggle_preview,
             },
             n = {
               ["q"] = actions.close,
             },
           },
-          preview = {                                                                                                                                                                          
-            hide_on_startup = true -- hide previewer when picker starts
-          } 
+          preview = {
+            hide_on_startup = true, -- hide previewer when picker starts
+          },
         },
       }
     end,
-  }
+  },
 }
