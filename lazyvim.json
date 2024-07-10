@@ -1,7 +1,10 @@
 {
   "extras": [
     "lazyvim.plugins.extras.coding.mini-comment",
+    "lazyvim.plugins.extras.coding.yanky",
     "lazyvim.plugins.extras.editor.illuminate",
+    "lazyvim.plugins.extras.lang.markdown",
+    "lazyvim.plugins.extras.lang.tailwind",
     "lazyvim.plugins.extras.ui.alpha",
     "lazyvim.plugins.extras.ui.edgy",
     "lazyvim.plugins.extras.util.dot",
