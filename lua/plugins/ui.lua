@@ -159,7 +159,7 @@ return {
               "filename",
               file_status = true,
               newfile_status = false,
-              path = 1,
+              path = 0,
             },
           },
           lualine_x = {

@@ -11,14 +11,20 @@ return {
       require("alpha.term")
 
       local logo = [[
-                                          ⢰⣶⡆   ⣀⣤⡆ ⣶⣶⣶⣶⣶⣶⣶⣄  ⣠⣶⣶⣶⣶⣶⣶⣶ ⢰⣶⡆   ⢀⣤⡆ ⢰⣶⣶⣶⣶⣶⣤⡀  ⣶⣶    ⣶⣶
-                                          ⢸⣿⣿⣶⣴⣾⠿⠋⠁ ⣿⣿⣀  ⠈⣿⣿  ⣿⣿⠁  ⣠⣿⣿ ⢸⣿⣿⣷⣶⣾⡿⠛⠁  ⣀⣀⣀⣀⣉⡻⢿⡇ ⣿⣿⣀   ⣿⣿
-                                          ⢸⣿⡇⠉⠛⠿⣷⣦⡀ ⣿⣿⠿⣿⣦⣄⡉⠉  ⣿⣿⣠⣴⣿⠿⣿⣿ ⢸⣿⡇⠈⠙⠿⣿⣦⡄ ⢰⣿⣟⣛⣛⣛⣁⣀⡀ ⣿⣿⠿⣿⣦⣄⣿⣿
-                                          ⠘⠛⠃   ⠈⠙⠃ ⠛⠛  ⠙⠛⠛⠒  ⠛⠛⠛⠉  ⠛⠛ ⠘⠛⠃    ⠙⠃ ⠘⠛⠛⠛⠛⠛⠛⠛⠃ ⠛⠛  ⠙⠛⠛⠛
+                                        ⢰⣶⡆   ⣀⣤⡆ ⣶⣶⣶⣶⣶⣶⣶⣄  ⣠⣶⣶⣶⣶⣶⣶⣶ ⢰⣶⡆   ⢀⣤⡆ ⢰⣶⣶⣶⣶⣶⣤⡀  ⣶⣶    ⣶⣶
+                                        ⢸⣿⣿⣶⣴⣾⠿⠋⠁ ⣿⣿⣀  ⠈⣿⣿  ⣿⣿⠁  ⣠⣿⣿ ⢸⣿⣿⣷⣶⣾⡿⠛⠁  ⣀⣀⣀⣀⣉⡻⢿⡇ ⣿⣿⣀   ⣿⣿
+                                        ⢸⣿⡇⠉⠛⠿⣷⣦⡀ ⣿⣿⠿⣿⣦⣄⡉⠉  ⣿⣿⣠⣴⣿⠿⣿⣿ ⢸⣿⡇⠈⠙⠿⣿⣦⡄ ⢰⣿⣟⣛⣛⣛⣁⣀⡀ ⣿⣿⠿⣿⣦⣄⣿⣿
+                                        ⠘⠛⠃   ⠈⠙⠃ ⠛⠛  ⠙⠛⠛⠒  ⠛⠛⠛⠉  ⠛⠛ ⠘⠛⠃    ⠙⠃ ⠘⠛⠛⠛⠛⠛⠛⠛⠃ ⠛⠛  ⠙⠛⠛⠛
       ]]
       dashboard.section.header.type = "group"
       dashboard.section.header.val = {
         { type = "text", val = vim.split(logo, "\n"), position = "center" },
+        { type = "padding", val = 1 },
+        {
+          type = "text",
+          val = "Rage, rage, rage against the dying of light",
+          opts = { position = "center", shrink_margin = false, hl = "Type" },
+        },
       }
 
       dashboard.section.buttons.val = {
@@ -32,7 +38,6 @@ return {
         button.opts.position = "center"
         button.opts.width = 25
       end
-      dashboard.section.header.opts.hl = ""
       dashboard.section.footer.opts.hl = "String"
       dashboard.opts.layout[1].val = 8
       return dashboard
@@ -58,22 +63,27 @@ return {
         callback = function()
           local current_hour = tonumber(os.date("%H"))
 
-          local greeting
+          local greeting, greetingColor
 
           if current_hour < 5 then
             greeting = "      Good night!  "
+            greetingColor = "PreProc"
           elseif current_hour < 12 then
             greeting = "   󰼰   Good morning!  "
+            greetingColor = "Operator"
           elseif current_hour < 17 then
             greeting = "      Good afternoon!   "
+            greetingColor = "Type"
           elseif current_hour < 20 then
             greeting = "   󰖝   Good evening!  "
+            greetingColor = "Boolean"
           else
             greeting = "   󰖔   Good night!  "
+            greetingColor = "Identifier"
           end
 
           dashboard.section.footer.val = greeting
-
+          dashboard.section.footer.opts.hl = greetingColor
           pcall(vim.cmd.AlphaRedraw)
         end,
       })
